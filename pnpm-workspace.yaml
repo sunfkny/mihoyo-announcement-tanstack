@@ -1,0 +1,8 @@
+minimumReleaseAge: 1440
+trustPolicyIgnoreAfter: 525600
+shellEmulator: true
+trustPolicy: no-downgrade
+overrides:
+  vite: ">=8.1.4"
+allowBuilds:
+  esbuild: true
