@@ -6,3 +6,4 @@ overrides:
   vite: ">=8.1.4"
 allowBuilds:
   esbuild: true
+  tesseract.js: false

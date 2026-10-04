@@ -10,103 +10,114 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AnnouncementRouteImport } from './routes/announcement'
-import { Route as AnnouncementBh3RouteImport } from './routes/announcement.bh3'
-import { Route as AnnouncementHk4eRouteImport } from './routes/announcement.hk4e'
-import { Route as AnnouncementHkrpgRouteImport } from './routes/announcement.hkrpg'
-import { Route as AnnouncementNapRouteImport } from './routes/announcement.nap'
-import { Route as ApiAnnouncementBh3RouteImport } from './routes/api.announcement.bh3'
-import { Route as ApiAnnouncementHk4eRouteImport } from './routes/api.announcement.hk4e'
-import { Route as ApiAnnouncementHkrpgRouteImport } from './routes/api.announcement.hkrpg'
-import { Route as ApiAnnouncementNapRouteImport } from './routes/api.announcement.nap'
+import { Route as AnnouncementRouteRouteImport } from './routes/announcement/route'
+import { Route as AnnouncementBh3RouteRouteImport } from './routes/announcement/bh3/route'
+import { Route as AnnouncementHk4eRouteRouteImport } from './routes/announcement/hk4e/route'
+import { Route as AnnouncementHkrpgRouteRouteImport } from './routes/announcement/hkrpg/route'
+import { Route as AnnouncementNapRouteRouteImport } from './routes/announcement/nap/route'
+import { Route as ApiAnnouncementBh3RouteRouteImport } from './routes/api/announcement/bh3/route'
+import { Route as ApiAnnouncementHk4eRouteRouteImport } from './routes/api/announcement/hk4e/route'
+import { Route as ApiAnnouncementHkrpgRouteRouteImport } from './routes/api/announcement/hkrpg/route'
+import { Route as ApiAnnouncementNapRouteRouteImport } from './routes/api/announcement/nap/route'
+import { Route as ApiAnnouncementBh3OcrRouteImport } from './routes/api/announcement/bh3/ocr'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AnnouncementRoute = AnnouncementRouteImport.update({
+const AnnouncementRouteRoute = AnnouncementRouteRouteImport.update({
   id: '/announcement',
   path: '/announcement',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AnnouncementBh3Route = AnnouncementBh3RouteImport.update({
+const AnnouncementBh3RouteRoute = AnnouncementBh3RouteRouteImport.update({
   id: '/bh3',
   path: '/bh3',
-  getParentRoute: () => AnnouncementRoute,
+  getParentRoute: () => AnnouncementRouteRoute,
 } as any)
-const AnnouncementHk4eRoute = AnnouncementHk4eRouteImport.update({
+const AnnouncementHk4eRouteRoute = AnnouncementHk4eRouteRouteImport.update({
   id: '/hk4e',
   path: '/hk4e',
-  getParentRoute: () => AnnouncementRoute,
+  getParentRoute: () => AnnouncementRouteRoute,
 } as any)
-const AnnouncementHkrpgRoute = AnnouncementHkrpgRouteImport.update({
+const AnnouncementHkrpgRouteRoute = AnnouncementHkrpgRouteRouteImport.update({
   id: '/hkrpg',
   path: '/hkrpg',
-  getParentRoute: () => AnnouncementRoute,
+  getParentRoute: () => AnnouncementRouteRoute,
 } as any)
-const AnnouncementNapRoute = AnnouncementNapRouteImport.update({
+const AnnouncementNapRouteRoute = AnnouncementNapRouteRouteImport.update({
   id: '/nap',
   path: '/nap',
-  getParentRoute: () => AnnouncementRoute,
+  getParentRoute: () => AnnouncementRouteRoute,
 } as any)
-const ApiAnnouncementBh3Route = ApiAnnouncementBh3RouteImport.update({
+const ApiAnnouncementBh3RouteRoute = ApiAnnouncementBh3RouteRouteImport.update({
   id: '/api/announcement/bh3',
   path: '/api/announcement/bh3',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAnnouncementHk4eRoute = ApiAnnouncementHk4eRouteImport.update({
-  id: '/api/announcement/hk4e',
-  path: '/api/announcement/hk4e',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAnnouncementHkrpgRoute = ApiAnnouncementHkrpgRouteImport.update({
-  id: '/api/announcement/hkrpg',
-  path: '/api/announcement/hkrpg',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAnnouncementNapRoute = ApiAnnouncementNapRouteImport.update({
+const ApiAnnouncementHk4eRouteRoute =
+  ApiAnnouncementHk4eRouteRouteImport.update({
+    id: '/api/announcement/hk4e',
+    path: '/api/announcement/hk4e',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAnnouncementHkrpgRouteRoute =
+  ApiAnnouncementHkrpgRouteRouteImport.update({
+    id: '/api/announcement/hkrpg',
+    path: '/api/announcement/hkrpg',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAnnouncementNapRouteRoute = ApiAnnouncementNapRouteRouteImport.update({
   id: '/api/announcement/nap',
   path: '/api/announcement/nap',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAnnouncementBh3OcrRoute = ApiAnnouncementBh3OcrRouteImport.update({
+  id: '/ocr',
+  path: '/ocr',
+  getParentRoute: () => ApiAnnouncementBh3RouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/announcement': typeof AnnouncementRouteWithChildren
-  '/announcement/bh3': typeof AnnouncementBh3Route
-  '/announcement/hk4e': typeof AnnouncementHk4eRoute
-  '/announcement/hkrpg': typeof AnnouncementHkrpgRoute
-  '/announcement/nap': typeof AnnouncementNapRoute
-  '/api/announcement/bh3': typeof ApiAnnouncementBh3Route
-  '/api/announcement/hk4e': typeof ApiAnnouncementHk4eRoute
-  '/api/announcement/hkrpg': typeof ApiAnnouncementHkrpgRoute
-  '/api/announcement/nap': typeof ApiAnnouncementNapRoute
+  '/announcement': typeof AnnouncementRouteRouteWithChildren
+  '/announcement/bh3': typeof AnnouncementBh3RouteRoute
+  '/announcement/hk4e': typeof AnnouncementHk4eRouteRoute
+  '/announcement/hkrpg': typeof AnnouncementHkrpgRouteRoute
+  '/announcement/nap': typeof AnnouncementNapRouteRoute
+  '/api/announcement/bh3': typeof ApiAnnouncementBh3RouteRouteWithChildren
+  '/api/announcement/hk4e': typeof ApiAnnouncementHk4eRouteRoute
+  '/api/announcement/hkrpg': typeof ApiAnnouncementHkrpgRouteRoute
+  '/api/announcement/nap': typeof ApiAnnouncementNapRouteRoute
+  '/api/announcement/bh3/ocr': typeof ApiAnnouncementBh3OcrRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/announcement': typeof AnnouncementRouteWithChildren
-  '/announcement/bh3': typeof AnnouncementBh3Route
-  '/announcement/hk4e': typeof AnnouncementHk4eRoute
-  '/announcement/hkrpg': typeof AnnouncementHkrpgRoute
-  '/announcement/nap': typeof AnnouncementNapRoute
-  '/api/announcement/bh3': typeof ApiAnnouncementBh3Route
-  '/api/announcement/hk4e': typeof ApiAnnouncementHk4eRoute
-  '/api/announcement/hkrpg': typeof ApiAnnouncementHkrpgRoute
-  '/api/announcement/nap': typeof ApiAnnouncementNapRoute
+  '/announcement': typeof AnnouncementRouteRouteWithChildren
+  '/announcement/bh3': typeof AnnouncementBh3RouteRoute
+  '/announcement/hk4e': typeof AnnouncementHk4eRouteRoute
+  '/announcement/hkrpg': typeof AnnouncementHkrpgRouteRoute
+  '/announcement/nap': typeof AnnouncementNapRouteRoute
+  '/api/announcement/bh3': typeof ApiAnnouncementBh3RouteRouteWithChildren
+  '/api/announcement/hk4e': typeof ApiAnnouncementHk4eRouteRoute
+  '/api/announcement/hkrpg': typeof ApiAnnouncementHkrpgRouteRoute
+  '/api/announcement/nap': typeof ApiAnnouncementNapRouteRoute
+  '/api/announcement/bh3/ocr': typeof ApiAnnouncementBh3OcrRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/announcement': typeof AnnouncementRouteWithChildren
-  '/announcement/bh3': typeof AnnouncementBh3Route
-  '/announcement/hk4e': typeof AnnouncementHk4eRoute
-  '/announcement/hkrpg': typeof AnnouncementHkrpgRoute
-  '/announcement/nap': typeof AnnouncementNapRoute
-  '/api/announcement/bh3': typeof ApiAnnouncementBh3Route
-  '/api/announcement/hk4e': typeof ApiAnnouncementHk4eRoute
-  '/api/announcement/hkrpg': typeof ApiAnnouncementHkrpgRoute
-  '/api/announcement/nap': typeof ApiAnnouncementNapRoute
+  '/announcement': typeof AnnouncementRouteRouteWithChildren
+  '/announcement/bh3': typeof AnnouncementBh3RouteRoute
+  '/announcement/hk4e': typeof AnnouncementHk4eRouteRoute
+  '/announcement/hkrpg': typeof AnnouncementHkrpgRouteRoute
+  '/announcement/nap': typeof AnnouncementNapRouteRoute
+  '/api/announcement/bh3': typeof ApiAnnouncementBh3RouteRouteWithChildren
+  '/api/announcement/hk4e': typeof ApiAnnouncementHk4eRouteRoute
+  '/api/announcement/hkrpg': typeof ApiAnnouncementHkrpgRouteRoute
+  '/api/announcement/nap': typeof ApiAnnouncementNapRouteRoute
+  '/api/announcement/bh3/ocr': typeof ApiAnnouncementBh3OcrRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +132,7 @@ export interface FileRouteTypes {
     | '/api/announcement/hk4e'
     | '/api/announcement/hkrpg'
     | '/api/announcement/nap'
+    | '/api/announcement/bh3/ocr'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +145,7 @@ export interface FileRouteTypes {
     | '/api/announcement/hk4e'
     | '/api/announcement/hkrpg'
     | '/api/announcement/nap'
+    | '/api/announcement/bh3/ocr'
   id:
     | '__root__'
     | '/'
@@ -145,15 +158,16 @@ export interface FileRouteTypes {
     | '/api/announcement/hk4e'
     | '/api/announcement/hkrpg'
     | '/api/announcement/nap'
+    | '/api/announcement/bh3/ocr'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AnnouncementRoute: typeof AnnouncementRouteWithChildren
-  ApiAnnouncementBh3Route: typeof ApiAnnouncementBh3Route
-  ApiAnnouncementHk4eRoute: typeof ApiAnnouncementHk4eRoute
-  ApiAnnouncementHkrpgRoute: typeof ApiAnnouncementHkrpgRoute
-  ApiAnnouncementNapRoute: typeof ApiAnnouncementNapRoute
+  AnnouncementRouteRoute: typeof AnnouncementRouteRouteWithChildren
+  ApiAnnouncementBh3RouteRoute: typeof ApiAnnouncementBh3RouteRouteWithChildren
+  ApiAnnouncementHk4eRouteRoute: typeof ApiAnnouncementHk4eRouteRoute
+  ApiAnnouncementHkrpgRouteRoute: typeof ApiAnnouncementHkrpgRouteRoute
+  ApiAnnouncementNapRouteRoute: typeof ApiAnnouncementNapRouteRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -169,93 +183,113 @@ declare module '@tanstack/react-router' {
       id: '/announcement'
       path: '/announcement'
       fullPath: '/announcement'
-      preLoaderRoute: typeof AnnouncementRouteImport
+      preLoaderRoute: typeof AnnouncementRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/announcement/bh3': {
       id: '/announcement/bh3'
       path: '/bh3'
       fullPath: '/announcement/bh3'
-      preLoaderRoute: typeof AnnouncementBh3RouteImport
-      parentRoute: typeof AnnouncementRoute
+      preLoaderRoute: typeof AnnouncementBh3RouteRouteImport
+      parentRoute: typeof AnnouncementRouteRoute
     }
     '/announcement/hk4e': {
       id: '/announcement/hk4e'
       path: '/hk4e'
       fullPath: '/announcement/hk4e'
-      preLoaderRoute: typeof AnnouncementHk4eRouteImport
-      parentRoute: typeof AnnouncementRoute
+      preLoaderRoute: typeof AnnouncementHk4eRouteRouteImport
+      parentRoute: typeof AnnouncementRouteRoute
     }
     '/announcement/hkrpg': {
       id: '/announcement/hkrpg'
       path: '/hkrpg'
       fullPath: '/announcement/hkrpg'
-      preLoaderRoute: typeof AnnouncementHkrpgRouteImport
-      parentRoute: typeof AnnouncementRoute
+      preLoaderRoute: typeof AnnouncementHkrpgRouteRouteImport
+      parentRoute: typeof AnnouncementRouteRoute
     }
     '/announcement/nap': {
       id: '/announcement/nap'
       path: '/nap'
       fullPath: '/announcement/nap'
-      preLoaderRoute: typeof AnnouncementNapRouteImport
-      parentRoute: typeof AnnouncementRoute
+      preLoaderRoute: typeof AnnouncementNapRouteRouteImport
+      parentRoute: typeof AnnouncementRouteRoute
     }
     '/api/announcement/bh3': {
       id: '/api/announcement/bh3'
       path: '/api/announcement/bh3'
       fullPath: '/api/announcement/bh3'
-      preLoaderRoute: typeof ApiAnnouncementBh3RouteImport
+      preLoaderRoute: typeof ApiAnnouncementBh3RouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/announcement/hk4e': {
       id: '/api/announcement/hk4e'
       path: '/api/announcement/hk4e'
       fullPath: '/api/announcement/hk4e'
-      preLoaderRoute: typeof ApiAnnouncementHk4eRouteImport
+      preLoaderRoute: typeof ApiAnnouncementHk4eRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/announcement/hkrpg': {
       id: '/api/announcement/hkrpg'
       path: '/api/announcement/hkrpg'
       fullPath: '/api/announcement/hkrpg'
-      preLoaderRoute: typeof ApiAnnouncementHkrpgRouteImport
+      preLoaderRoute: typeof ApiAnnouncementHkrpgRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/announcement/nap': {
       id: '/api/announcement/nap'
       path: '/api/announcement/nap'
       fullPath: '/api/announcement/nap'
-      preLoaderRoute: typeof ApiAnnouncementNapRouteImport
+      preLoaderRoute: typeof ApiAnnouncementNapRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/api/announcement/bh3/ocr': {
+      id: '/api/announcement/bh3/ocr'
+      path: '/ocr'
+      fullPath: '/api/announcement/bh3/ocr'
+      preLoaderRoute: typeof ApiAnnouncementBh3OcrRouteImport
+      parentRoute: typeof ApiAnnouncementBh3RouteRoute
     }
   }
 }
 
-interface AnnouncementRouteChildren {
-  AnnouncementBh3Route: typeof AnnouncementBh3Route
-  AnnouncementHk4eRoute: typeof AnnouncementHk4eRoute
-  AnnouncementHkrpgRoute: typeof AnnouncementHkrpgRoute
-  AnnouncementNapRoute: typeof AnnouncementNapRoute
+interface AnnouncementRouteRouteChildren {
+  AnnouncementBh3RouteRoute: typeof AnnouncementBh3RouteRoute
+  AnnouncementHk4eRouteRoute: typeof AnnouncementHk4eRouteRoute
+  AnnouncementHkrpgRouteRoute: typeof AnnouncementHkrpgRouteRoute
+  AnnouncementNapRouteRoute: typeof AnnouncementNapRouteRoute
 }
 
-const AnnouncementRouteChildren: AnnouncementRouteChildren = {
-  AnnouncementBh3Route: AnnouncementBh3Route,
-  AnnouncementHk4eRoute: AnnouncementHk4eRoute,
-  AnnouncementHkrpgRoute: AnnouncementHkrpgRoute,
-  AnnouncementNapRoute: AnnouncementNapRoute,
+const AnnouncementRouteRouteChildren: AnnouncementRouteRouteChildren = {
+  AnnouncementBh3RouteRoute: AnnouncementBh3RouteRoute,
+  AnnouncementHk4eRouteRoute: AnnouncementHk4eRouteRoute,
+  AnnouncementHkrpgRouteRoute: AnnouncementHkrpgRouteRoute,
+  AnnouncementNapRouteRoute: AnnouncementNapRouteRoute,
 }
 
-const AnnouncementRouteWithChildren = AnnouncementRoute._addFileChildren(
-  AnnouncementRouteChildren,
-)
+const AnnouncementRouteRouteWithChildren =
+  AnnouncementRouteRoute._addFileChildren(AnnouncementRouteRouteChildren)
+
+interface ApiAnnouncementBh3RouteRouteChildren {
+  ApiAnnouncementBh3OcrRoute: typeof ApiAnnouncementBh3OcrRoute
+}
+
+const ApiAnnouncementBh3RouteRouteChildren: ApiAnnouncementBh3RouteRouteChildren =
+  {
+    ApiAnnouncementBh3OcrRoute: ApiAnnouncementBh3OcrRoute,
+  }
+
+const ApiAnnouncementBh3RouteRouteWithChildren =
+  ApiAnnouncementBh3RouteRoute._addFileChildren(
+    ApiAnnouncementBh3RouteRouteChildren,
+  )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AnnouncementRoute: AnnouncementRouteWithChildren,
-  ApiAnnouncementBh3Route: ApiAnnouncementBh3Route,
-  ApiAnnouncementHk4eRoute: ApiAnnouncementHk4eRoute,
-  ApiAnnouncementHkrpgRoute: ApiAnnouncementHkrpgRoute,
-  ApiAnnouncementNapRoute: ApiAnnouncementNapRoute,
+  AnnouncementRouteRoute: AnnouncementRouteRouteWithChildren,
+  ApiAnnouncementBh3RouteRoute: ApiAnnouncementBh3RouteRouteWithChildren,
+  ApiAnnouncementHk4eRouteRoute: ApiAnnouncementHk4eRouteRoute,
+  ApiAnnouncementHkrpgRouteRoute: ApiAnnouncementHkrpgRouteRoute,
+  ApiAnnouncementNapRouteRoute: ApiAnnouncementNapRouteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

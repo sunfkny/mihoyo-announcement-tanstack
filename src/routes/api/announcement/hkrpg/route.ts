@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { announcementCacheControl, getAnnouncementInfo } from "#/utils/announcements.server";
+import { getHkrpgInfo } from "#/server/services/hkrpg";
+import { announcementCacheControl } from "#/utils/announcements.server";
 
-export const Route = createFileRoute("/api/announcement/nap")({
+export const Route = createFileRoute("/api/announcement/hkrpg")({
   server: {
     handlers: {
       GET: async () => {
-        const data = await getAnnouncementInfo("nap");
+        const data = await getHkrpgInfo();
         return Response.json(data, {
           headers: {
             "CDN-Cache-Control": announcementCacheControl,

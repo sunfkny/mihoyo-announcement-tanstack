@@ -21,3 +21,9 @@ export interface AnnouncementResponse {
   progress: AnnouncementProgress;
   gacha_info: AnnouncementItem[];
 }
+
+export type AnnouncementOcrItem = Pick<AnnouncementItem, "ann_id" | "start_time" | "end_time" | "start_time_humanize" | "end_time_humanize">;
+
+export interface AnnouncementOcrResponse {
+  gacha_info: AnnouncementOcrItem[];
+}

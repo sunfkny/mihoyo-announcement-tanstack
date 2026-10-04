@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "#/lib/utils";
 import { resolveTimeAndResetFontSize } from "#/utils/announcement-html";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   Dialog,
   DialogBody,
@@ -14,7 +14,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
+} from "../ui/dialog";
 
 const modalClasses: Record<Game, { content: string; header: string; title: string; body: string }> = {
   bh3: {

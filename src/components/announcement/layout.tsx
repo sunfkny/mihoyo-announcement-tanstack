@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { cn } from "#/lib/utils";
 import { getGame } from "#/utils/games";
 import { gameIconProcess } from "#/utils/image-processing";
-import { NavBar } from "./nav-bar";
+import { NavBar } from "../navigation/nav-bar";
 
 declare module "@tanstack/react-router" {
   interface StaticDataRouteOption {

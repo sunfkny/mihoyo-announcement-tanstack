@@ -19,8 +19,15 @@
 }
 
 @font-face {
+  font-family: nap-zh-cn;
+  src: url("https://sdk.mihoyo.com/nap/announcement/fonts/zh-cn.b7325fbd.otf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
   font-family: nap-zh-cn-light;
-  src: url("https://sdk.mihoyo.com/nap/announcement/fonts/zh-cn-light.e490414b.ttf") format("truetype");
+  src: url("https://sdk.mihoyo.com/nap/announcement/fonts/zh-cn-light.d2ff5c42.otf") format("truetype");
   font-weight: 400;
   font-display: swap;
 }
@@ -442,7 +449,7 @@
 
 .use-nap-font {
   font-family:
-    nap-zh-cn-light,
+    nap-zh-cn,
     Microsoft YaHei,
     "微软雅黑",
     Arial,

@@ -5,5 +5,8 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   resolve: { tsconfigPaths: true },
+  ssr: {
+    external: ["tesseract.js", "@tesseract.js-data/chi_sim", "image-size"],
+  },
   plugins: [tailwindcss(), tanstackStart(), viteReact()],
 });

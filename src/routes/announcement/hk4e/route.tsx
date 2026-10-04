@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AnnouncementError } from "#/components/announcement-error";
-import { AnnouncementPage } from "#/components/announcement-page";
-import { announcementQueryOptions } from "#/utils/announcements.query";
+import { AnnouncementError } from "#/components/announcement/error";
+import { Hk4eAnnouncementPage } from "#/components/announcement/hk4e/page";
+import { hk4eAnnouncementQueryOptions } from "#/utils/hk4e-announcement.query";
 
 export const Route = createFileRoute("/announcement/hk4e")({
   staticData: { game: "hk4e" },
-  loader: ({ context }) => context.queryClient.query({ ...announcementQueryOptions("hk4e"), staleTime: "static" }),
+  loader: ({ context }) => context.queryClient.query({ ...hk4eAnnouncementQueryOptions(), staleTime: "static" }),
   head: () => ({
     meta: [{ title: "原神卡池 - Mihoyo Announcement" }],
     links: [
@@ -24,5 +24,5 @@ export const Route = createFileRoute("/announcement/hk4e")({
 
 function AnnouncementRoute() {
   const data = Route.useLoaderData();
-  return <AnnouncementPage game="hk4e" data={data} />;
+  return <Hk4eAnnouncementPage data={data} />;
 }
