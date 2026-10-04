@@ -662,3 +662,132 @@
 .nap-content summary {
   position: relative;
 }
+
+@property --card-accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #80683f;
+}
+
+.announcement-card {
+  --card-accent: #80683f;
+  --card-border: #d9cdb8;
+  margin-block: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  background: #f9f6f2;
+  color: #393b40;
+  text-align: left;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.announcement-card:hover {
+  border-color: var(--card-accent);
+  box-shadow: 0 0 0 1px var(--card-accent);
+}
+
+.announcement-card:focus-visible {
+  outline: 2px solid var(--card-accent);
+  outline-offset: 3px;
+}
+
+.announcement-card img {
+  display: block;
+  width: 100%;
+}
+
+.announcement-card-details {
+  padding: 12px 16px;
+  border-top: 1px solid var(--card-border);
+  line-height: 1.5;
+}
+
+.announcement-card[data-game="bh3"] {
+  --card-accent: #00c3ff;
+  --card-border: #22638a;
+  border-radius: 2px;
+  background: #003366;
+  color: #e6f4ff;
+}
+
+.announcement-card[data-game="bh3"] img {
+  border-radius: 0;
+}
+
+.announcement-card[data-game="hkrpg"] {
+  --card-accent: #786443;
+  --card-border: #adb5c6;
+  border-radius: 2px 12px 2px 2px;
+  background: #d9deea;
+  color: #303440;
+}
+
+.announcement-card[data-game="nap"] {
+  --card-accent: #e4f143;
+  --card-border: #292929;
+  border-width: 6px;
+  border-radius: 20px;
+  background: #111;
+  color: #f0f0f0;
+}
+
+.announcement-card[data-game="nap"]:is(:hover, :focus-visible) {
+  border-color: var(--card-accent);
+  box-shadow: none;
+  outline: none;
+  animation: nap-card-highlight 1.5s linear infinite;
+}
+
+@keyframes nap-card-highlight {
+  0%, 10%, 100% {
+    --card-accent: #fbdc06;
+  }
+
+  20% {
+    --card-accent: #ebd705;
+  }
+
+  30% {
+    --card-accent: #d0cf05;
+  }
+
+  40% {
+    --card-accent: #b2c404;
+  }
+
+  50% {
+    --card-accent: #9abd02;
+  }
+
+  55% {
+    --card-accent: #94bc01;
+  }
+
+  60% {
+    --card-accent: #99bd02;
+  }
+
+  70% {
+    --card-accent: #b0c403;
+  }
+
+  80% {
+    --card-accent: #cece04;
+  }
+
+  90% {
+    --card-accent: #e9d704;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-card {
+    transition: none;
+  }
+
+  .announcement-card[data-game="nap"]:is(:hover, :focus-visible) {
+    animation: none;
+    --card-accent: #fbdc06;
+  }
+}

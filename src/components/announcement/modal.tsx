@@ -66,8 +66,22 @@ export function AnnouncementModal({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger onClick={handleTriggerClick}>
-        {children}
+      <DialogTrigger asChild onClick={handleTriggerClick}>
+        <div
+          role="button"
+          tabIndex={0}
+          aria-label={`查看公告：${item.title}`}
+          className="announcement-card"
+          data-game={game}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              setOpen(true);
+            }
+          }}
+        >
+          {children}
+        </div>
       </DialogTrigger>
       <DialogContent className={cn(classes.content, `use-${game}-font`)} aria-describedby={undefined}>
         <DialogHeader className={classes.header}>

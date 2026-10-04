@@ -24,40 +24,40 @@ export function AnnouncementCard({
   children?: ReactNode;
 }) {
   return (
-    <>
-      <AnnouncementModal game={game} item={item}>
-        {game === "nap"
-          ? item.images?.map((image, index) => (
-              <div key={`${item.ann_id}-${image}`} className={imageAspectClasses.nap}>
-                <img src={ossProcessWebp(image)} alt={image} fetchPriority={priority && index === 0 ? "high" : "auto"} />
-              </div>
-            ))
-          : (
-              <div className={imageAspectClasses[game]}>
-                <img
-                  className={game === "bh3" ? "rounded" : undefined}
-                  src={ossProcessWebp(item.image)}
-                  alt={item.title}
-                  fetchPriority={priority ? "high" : "auto"}
-                />
-              </div>
-            )}
-      </AnnouncementModal>
-      <p>{item.title}</p>
-      {children ?? (
-        <>
-          <p>
-            开始时间:
-            {" "}
-            {appendAnnotation(item.start_time, item.start_time_humanize)}
-          </p>
-          <p>
-            结束时间:
-            {" "}
-            {appendAnnotation(item.end_time, item.end_time_humanize)}
-          </p>
-        </>
-      )}
-    </>
+    <AnnouncementModal game={game} item={item}>
+      {game === "nap"
+        ? item.images?.map((image, index) => (
+            <div key={`${item.ann_id}-${image}`} className={imageAspectClasses.nap}>
+              <img src={ossProcessWebp(image)} alt={image} fetchPriority={priority && index === 0 ? "high" : "auto"} />
+            </div>
+          ))
+        : (
+            <div className={imageAspectClasses[game]}>
+              <img
+                className={game === "bh3" ? "rounded" : undefined}
+                src={ossProcessWebp(item.image)}
+                alt={item.title}
+                fetchPriority={priority ? "high" : "auto"}
+              />
+            </div>
+          )}
+      <div className="announcement-card-details">
+        <p>{item.title}</p>
+        {children ?? (
+          <>
+            <p>
+              开始时间:
+              {" "}
+              {appendAnnotation(item.start_time, item.start_time_humanize)}
+            </p>
+            <p>
+              结束时间:
+              {" "}
+              {appendAnnotation(item.end_time, item.end_time_humanize)}
+            </p>
+          </>
+        )}
+      </div>
+    </AnnouncementModal>
   );
 }

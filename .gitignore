@@ -1,5 +1,6 @@
 # TanStack Start dev/build outputs
 .output
+.vercel
 .cache
 dist
 
