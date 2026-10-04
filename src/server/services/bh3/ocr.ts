@@ -23,7 +23,7 @@ export async function getBh3OcrResponse(request: Request): Promise<Response> {
   if (!ids) {
     return Response.json({ error: "ann_id must contain 1–8 positive integer IDs separated by commas" }, { status: 400, headers: noCache });
   }
-  const canonical = `?ann_id=${ids.join(",")}`;
+  const canonical = `?${new URLSearchParams({ ann_id: ids.join(",") })}`;
   if (url.search !== canonical) {
     return new Response(null, { status: 308, headers: { ...noCache, Location: `${url.pathname}${canonical}` } });
   }

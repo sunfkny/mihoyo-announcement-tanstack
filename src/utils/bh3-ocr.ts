@@ -11,7 +11,8 @@ export async function fetchBh3Ocr(annIds: number[], signal?: AbortSignal): Promi
   const url = getOcrUrl();
   const results: AnnouncementOcrResponse[] = [];
   for (let offset = 0; offset < ids.length; offset += 8) {
-    const response = await fetch(`${url}?ann_id=${ids.slice(offset, offset + 8).join(",")}`, { signal });
+    const query = new URLSearchParams({ ann_id: ids.slice(offset, offset + 8).join(",") });
+    const response = await fetch(`${url}?${query}`, { signal });
     if (!response.ok) {
       throw new Error(`图片时间识别失败: ${response.status}`);
     }
