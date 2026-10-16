@@ -4,7 +4,7 @@
 
 ## 工具与命令
 
-- 使用 `pnpm` 管理依赖和运行脚本。Node.js 版本需为 22 或以上。
+- 使用 `pnpm` 管理依赖和运行脚本。Node.js 版本需为 24 或以上。
 - 使用 `rg` 搜索文件和文本。需要 Python 工具时使用 `uv`，不要使用 `pip`。
 - `pnpm dev` 启动开发服务。
 - `pnpm lint` 运行 ESLint 检查。
