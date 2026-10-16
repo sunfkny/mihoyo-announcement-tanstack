@@ -1,5 +1,6 @@
 import type { AnnouncementItem } from "#/types/announcement";
 import { createFileRoute } from "@tanstack/react-router";
+import { Bh3AnnouncementLoading } from "#/components/announcement/bh3/loading";
 import { Bh3AnnouncementPage } from "#/components/announcement/bh3/page";
 import { AnnouncementError } from "#/components/announcement/error";
 import { getTimeHumanize } from "#/server/lib/datetime";
@@ -8,6 +9,9 @@ import { fetchBh3Ocr } from "#/utils/bh3-ocr";
 
 export const Route = createFileRoute("/announcement/bh3")({
   staticData: { game: "bh3" },
+  pendingComponent: Bh3AnnouncementLoading,
+  pendingMs: 0,
+  pendingMinMs: 0,
   loader: async ({ context, abortController }) => {
     const data = await context.queryClient.query({ ...bh3AnnouncementQueryOptions(), staleTime: "static" });
     const missingTimeItems = data.gacha_info.filter((item) => {

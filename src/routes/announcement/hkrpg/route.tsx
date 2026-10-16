@@ -1,10 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AnnouncementError } from "#/components/announcement/error";
+import { HkrpgAnnouncementLoading } from "#/components/announcement/hkrpg/loading";
 import { HkrpgAnnouncementPage } from "#/components/announcement/hkrpg/page";
 import { hkrpgAnnouncementQueryOptions } from "#/utils/hkrpg-announcement.query";
 
 export const Route = createFileRoute("/announcement/hkrpg")({
   staticData: { game: "hkrpg" },
+  pendingComponent: HkrpgAnnouncementLoading,
+  pendingMs: 0,
+  pendingMinMs: 0,
   loader: ({ context }) => context.queryClient.query({ ...hkrpgAnnouncementQueryOptions(), staleTime: "static" }),
   head: () => ({
     meta: [{ title: "崩坏：星穹铁道卡池 - Mihoyo Announcement" }],
