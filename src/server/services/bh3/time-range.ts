@@ -35,6 +35,7 @@ export function parseOcrTimeRange(text: string, reference: string): TimeRange | 
     }
     return parseLocalDate(`${year}年${month}月${day}日${hour}:${String(minute).padStart(2, "0")}`);
   };
+  // 图片时间省略年份，取最接近参考日期的年份。
   const candidates = [referenceYear - 1, referenceYear, referenceYear + 1]
     .map(year => ({ year, date: dateFor(matches[0], year) }))
     .filter(candidate => candidate.date !== null)
@@ -44,6 +45,7 @@ export function parseOcrTimeRange(text: string, reference: string): TimeRange | 
     return null;
   }
   if (matches.length === 1 && versionStart) {
+    // 版本更新时间没有具体时刻，保留公告中的文字。
     return { start: versionStart, end: formatChineseISOLocaleString(start.date) };
   }
   const crossesYear = Number(matches[1][1]) < Number(matches[0][1]);
@@ -78,6 +80,7 @@ export async function getBh3TimeRange(content: string, reference?: string, ocr =
       images.push(...[...element.querySelectorAll("img")].map(image => image.src));
     }
     for (const image of images.slice(0, 2)) {
+      // 公告列表时间作为年份参考，缺失时取图片上传日期。
       const imageReference = reference || /\/upload\/ann\/(\d{4})\/(\d{2})\/(\d{2})\//.exec(image)?.slice(1).join("-");
       if (!imageReference) {
         continue;

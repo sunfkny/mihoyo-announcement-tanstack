@@ -52,6 +52,7 @@ async function recognizeImage(url: string, jobId: string): Promise<string | null
   let timeout: ReturnType<typeof setTimeout> | undefined;
   const operation = async () => {
     const initializingAt = Date.now();
+    // worker 和中文模型从本地生产依赖加载，运行环境依赖 Node.js worker threads。
     const initialized = await createWorker("chi_sim", 1, {
       workerPath: require.resolve("tesseract.js/src/worker-script/node/index.js"),
       langPath: join(dirname(require.resolve("@tesseract.js-data/chi_sim")), "4.0.0_best_int"),
@@ -65,6 +66,7 @@ async function recognizeImage(url: string, jobId: string): Promise<string | null
     worker = initialized;
     console.info("[announcement-ocr] worker-ready", { jobId, url, initializeMs: Date.now() - initializingAt });
     const recognizingAt = Date.now();
+    // 补给时间位于图片左侧，识别范围限定为左侧 35%。
     const { data } = await worker.recognize(image, {
       rectangle: { top: 0, left: 0, width: Math.ceil(width * 0.35), height },
     });

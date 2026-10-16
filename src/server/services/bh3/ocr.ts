@@ -23,6 +23,7 @@ export async function getBh3OcrResponse(request: Request): Promise<Response> {
   if (!ids) {
     return Response.json({ error: "ann_id must contain 1–8 positive integer IDs separated by commas" }, { status: 400, headers: noCache });
   }
+  // 去重、排序后的公告 ID 使用同一 URL，统一 CDN 缓存键。
   const canonical = `?${new URLSearchParams({ ann_id: ids.join(",") })}`;
   if (url.search !== canonical) {
     return new Response(null, { status: 308, headers: { ...noCache, Location: `${url.pathname}${canonical}` } });
@@ -39,12 +40,14 @@ export async function getBh3OcrResponse(request: Request): Promise<Response> {
       return Response.json({ error: "Announcement not found", ann_ids: missing }, { status: 404, headers: noCache });
     }
     const results: AnnouncementOcrItem[] = [];
+    // 顺序识别限制同一请求同时占用的 worker 数量。
     for (const id of ids) {
       const item = announcements.find(item => item.ann_id === id)!;
       const reference = list.data.list.flatMap(group => group.list).find(item => item.ann_id === id)?.start_time;
       const range = await getBh3TimeRange(item.content, reference, true);
       const start = parseTimeHumanize(range?.start);
       const end = parseTimeHumanize(range?.end);
+      // 响应保留固定时间和公告原文中的时间描述，相对时间由页面计算。
       results.push({
         ann_id: id,
         start_time: start.time,
@@ -56,6 +59,8 @@ export async function getBh3OcrResponse(request: Request): Promise<Response> {
     const complete = results.every(item => (item.start_time || item.start_time_humanize) && item.end_time);
     console.info("[announcement-ocr-api] finished", { annIds: ids, upstreamMs, totalMs: Date.now() - started, complete });
     const data: AnnouncementOcrResponse = { gacha_info: results };
+    // 完整结果声明 CDN 缓存 24 小时，依赖 CDN 缓存 JSON 并将 ann_id 纳入缓存键。
+    // 错误和不完整结果使用 no-store，后续请求可重试识别。
     return Response.json(data, {
       headers: complete
         ? {

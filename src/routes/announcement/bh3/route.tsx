@@ -16,6 +16,7 @@ export const Route = createFileRoute("/announcement/bh3")({
       return !hasStartTime || !hasEndTime;
     });
     const missingTimeIds = missingTimeItems.map(item => item.ann_id);
+    // OCR Promise 交给页面的 Suspense 和 Await，公告内容先行渲染。
     const times = loadAnnouncementTimes(data.gacha_info, missingTimeIds, abortController.signal);
     return { data, times, missingTimeIds };
   },
