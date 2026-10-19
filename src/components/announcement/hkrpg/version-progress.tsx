@@ -1,8 +1,8 @@
 import type { AnnouncementProgress } from "#/types/announcement";
+import { Progress } from "#/components/ui/progress";
 import { appendAnnotation } from "#/utils/format-annotation";
-import { Progress } from "../ui/progress";
 
-export function AnnouncementVersionProgress({ progress }: { progress: AnnouncementProgress }) {
+export function HkrpgAnnouncementVersionProgress({ progress }: { progress: AnnouncementProgress }) {
   if (!progress.percent) {
     return null;
   }

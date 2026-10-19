@@ -1,6 +1,6 @@
 import type { AnnouncementResponse } from "#/types/announcement";
 import { queryOptions } from "@tanstack/react-query";
-import { getHkrpgAnnouncement } from "#/utils/announcements.functions";
+import { getHkrpgAnnouncement } from "#/utils/hkrpg-announcement.functions";
 
 export function hkrpgAnnouncementQueryOptions() {
   return queryOptions({

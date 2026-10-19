@@ -1,6 +1,6 @@
 import type { AnnouncementResponse } from "#/types/announcement";
 import { queryOptions } from "@tanstack/react-query";
-import { getHk4eAnnouncement } from "#/utils/announcements.functions";
+import { getHk4eAnnouncement } from "#/utils/hk4e-announcement.functions";
 
 export function hk4eAnnouncementQueryOptions() {
   return queryOptions({

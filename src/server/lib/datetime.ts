@@ -20,7 +20,7 @@ export function parseLocalDate(str: string, tz: number = 8) {
 
   const year = (() => {
     if (groups.year !== undefined) {
-      return Number.parseInt(groups.year || "0");
+      return Number.parseInt(groups.year);
     }
     const m = new Date().getMonth() + 1;
     const y = new Date().getFullYear();

@@ -177,7 +177,7 @@ export async function getHkrpgInfo(): Promise<HkrpgResponse> {
     });
     // use the first non-expired table time cell to avoid cross-matching unrelated phases
     const firstTimeRange = Iterator.from(document.querySelectorAll("table td[rowspan]"))
-      .map(i => i.textContent?.trim() ?? "")
+      .map(i => i.textContent.trim())
       .filter(text => text.includes("-"))
       .map((text) => {
         const [start_part, end_part] = text.split("-");

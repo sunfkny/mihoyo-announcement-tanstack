@@ -155,7 +155,7 @@ export async function getHk4eInfo(): Promise<Hk4eResponse> {
       p.innerHTML = p.textContent.trim();
     });
     const firstTimeRange = Iterator.from(document.querySelectorAll("table td[rowspan]"))
-      .map(i => i.textContent?.trim() ?? "")
+      .map(i => i.textContent.trim())
       .filter(text => text.includes("~"))
       .map((text) => {
         const [start_part, end_part] = text.split("~");

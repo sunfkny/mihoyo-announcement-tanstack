@@ -1,6 +1,6 @@
 import type { AnnouncementResponse } from "#/types/announcement";
 import { queryOptions } from "@tanstack/react-query";
-import { getNapAnnouncement } from "#/utils/announcements.functions";
+import { getNapAnnouncement } from "#/utils/nap-announcement.functions";
 
 export function napAnnouncementQueryOptions() {
   return queryOptions({

@@ -1,6 +1,6 @@
 import type { AnnouncementResponse } from "#/types/announcement";
 import { queryOptions } from "@tanstack/react-query";
-import { getBh3Announcement } from "#/utils/announcements.functions";
+import { getBh3Announcement } from "#/utils/bh3-announcement.functions";
 
 export function bh3AnnouncementQueryOptions() {
   return queryOptions({

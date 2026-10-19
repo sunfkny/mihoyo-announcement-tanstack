@@ -16,6 +16,7 @@ logs
 .fleet
 .idea
 .eslintcache
+coverage
 
 # Local env files
 .env
