@@ -43,7 +43,10 @@ export async function getBh3OcrResponse(request: Request): Promise<Response> {
     // 顺序识别限制同一请求同时占用的 worker 数量。
     for (const id of ids) {
       const item = announcements.find(item => item.ann_id === id)!;
-      const reference = list.data.list.flatMap(group => group.list).find(item => item.ann_id === id)?.start_time;
+      const reference = list.data.list.values()
+        .flatMap(group => group.list.values())
+        .find(item => item.ann_id === id)
+        ?.start_time;
       const range = await getBh3TimeRange(item.content, reference, true);
       const start = parseTimeHumanize(range?.start);
       const end = parseTimeHumanize(range?.end);

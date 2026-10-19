@@ -90,13 +90,13 @@ function getVersionInfoFromAnnList(
 
 function getGachaInfoFromAnnContent(
   annContent: Awaited<ReturnType<typeof getAnnContent>>,
-): {
+): IteratorObject<{
   content: string;
   ann_id: number;
   title: string;
   image: string;
-}[] {
-  return annContent.data.pic_list
+}> {
+  return annContent.data.pic_list.values()
     .filter(i => i.title.includes("跃迁"))
     .map((i) => {
       return {
@@ -176,7 +176,7 @@ export async function getHkrpgInfo(): Promise<HkrpgResponse> {
       p.innerHTML = p.textContent.trim();
     });
     // use the first non-expired table time cell to avoid cross-matching unrelated phases
-    const firstTimeRange = Array.from(document.querySelectorAll("table td[rowspan]"))
+    const firstTimeRange = Iterator.from(document.querySelectorAll("table td[rowspan]"))
       .map(i => i.textContent?.trim() ?? "")
       .filter(text => text.includes("-"))
       .map((text) => {
@@ -211,7 +211,7 @@ export async function getHkrpgInfo(): Promise<HkrpgResponse> {
       end_time_humanize,
     };
     return result;
-  });
+  }).toArray();
 
   return {
     progress,

@@ -93,13 +93,13 @@ function getVersionInfoFromAnnList(
 
 function getGachaInfoFromAnnContent(
   annContent: Awaited<ReturnType<typeof getAnnContent>>,
-): {
+): IteratorObject<{
   content: string;
   ann_id: number;
   title: string;
   image: string;
-}[] {
-  return annContent.data.list
+}> {
+  return annContent.data.list.values()
     .filter(i => i.subtitle.endsWith("祈愿"))
     .map((i) => {
       return {
@@ -154,7 +154,7 @@ export async function getHk4eInfo(): Promise<Hk4eResponse> {
     document.querySelectorAll("p").forEach((p) => {
       p.innerHTML = p.textContent.trim();
     });
-    const firstTimeRange = Array.from(document.querySelectorAll("table td[rowspan]"))
+    const firstTimeRange = Iterator.from(document.querySelectorAll("table td[rowspan]"))
       .map(i => i.textContent?.trim() ?? "")
       .filter(text => text.includes("~"))
       .map((text) => {
@@ -189,7 +189,7 @@ export async function getHk4eInfo(): Promise<Hk4eResponse> {
       end_time_humanize,
     };
     return result;
-  });
+  }).toArray();
 
   return {
     progress,

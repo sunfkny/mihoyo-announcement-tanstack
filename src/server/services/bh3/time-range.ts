@@ -16,7 +16,7 @@ export function parseOcrTimeRange(text: string, reference: string): TimeRange | 
   if (!normalized.includes("补给时间")) {
     return null;
   }
-  const matches = [...normalized.matchAll(/(\d{1,2})月(\d{1,2})日(\d{1,2}):(\d{2})(?!\d)/g)];
+  const matches = normalized.matchAll(/(\d{1,2})月(\d{1,2})日(\d{1,2}):(\d{2})(?!\d)/g).take(3).toArray();
   const versionStart = /\d+\.\d+版本更新后/.exec(normalized)?.[0];
   if (matches.length !== 2 && !(matches.length === 1 && versionStart)) {
     return null;
@@ -62,8 +62,6 @@ export async function getBh3TimeRange(content: string, reference?: string, ocr =
   });
   try {
     window.document.body.innerHTML = content;
-    const heading = [...window.document.querySelectorAll("h2,h3")].find(element => element.textContent.trim() === "补给信息");
-    const images: string[] = [];
     const text = normalizeTimeText(window.document.body.textContent);
     const match = /(?<start>\d+月\d+日\d+:\d+|\d+\.\d+版本更新后)[~～—–至-](?<end>\d+月\d+日\d+:\d+)/.exec(text);
     if (match?.groups) {
@@ -73,13 +71,19 @@ export async function getBh3TimeRange(content: string, reference?: string, ocr =
       return null;
     }
 
-    for (let element = heading?.nextElementSibling; element; element = element.nextElementSibling) {
-      if (/^H[1-6]$/.test(element.tagName)) {
-        break;
+    function* getImages() {
+      const heading = Iterator.from(window.document.querySelectorAll("h2,h3"))
+        .find(element => element.textContent.trim() === "补给信息");
+      for (let element = heading?.nextElementSibling; element; element = element.nextElementSibling) {
+        if (/^H[1-6]$/.test(element.tagName)) {
+          break;
+        }
+        for (const image of element.querySelectorAll("img")) {
+          yield image.src;
+        }
       }
-      images.push(...[...element.querySelectorAll("img")].map(image => image.src));
     }
-    for (const image of images.slice(0, 2)) {
+    for (const image of getImages().take(2)) {
       // 公告列表时间作为年份参考，缺失时取图片上传日期。
       const imageReference = reference || /\/upload\/ann\/(\d{4})\/(\d{2})\/(\d{2})\//.exec(image)?.slice(1).join("-");
       if (!imageReference) {

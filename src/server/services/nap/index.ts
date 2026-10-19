@@ -88,13 +88,13 @@ function getVersionInfoFromAnnList(
 
 function getGachaInfoFromAnnContent(
   annContent: Awaited<ReturnType<typeof getAnnContent>>,
-): {
+): IteratorObject<{
   content: string;
   ann_id: number;
   title: string;
   image: string;
-}[] {
-  return annContent.data.pic_list
+}> {
+  return annContent.data.pic_list.values()
     .filter(i => !i.subtitle.includes("调频回馈") && (i.subtitle.includes("调频") || i.subtitle.includes("频段")))
     .map((i) => {
       return {
@@ -194,7 +194,7 @@ export async function getNapInfo(): Promise<NapResponse> {
       end_time_humanize,
     };
     return result;
-  });
+  }).toArray();
 
   return {
     progress,

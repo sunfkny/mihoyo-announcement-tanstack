@@ -88,13 +88,13 @@ function getVersionInfoFromAnnList(
 
 function getGachaInfoFromAnnContent(
   annContent: Awaited<ReturnType<typeof getAnnContent>>,
-): {
+): IteratorObject<{
   content: string;
   ann_id: number;
   title: string;
   image: string;
-}[] {
-  return annContent.data.list
+}> {
+  return annContent.data.list.values()
     .filter(
       i =>
         i.subtitle.includes("补给")
@@ -169,7 +169,7 @@ export async function getBh3Info(): Promise<Bh3Response> {
         end_time_humanize,
       };
     },
-  );
+  ).toArray();
 
   return {
     progress,
