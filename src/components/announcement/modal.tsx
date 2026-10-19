@@ -62,7 +62,7 @@ export function AnnouncementModal({
     }
   }
 
-  const html = game === "bh3" ? item.content : resolveTimeAndResetFontSize(item.content);
+  const html = open ? (game === "bh3" ? item.content : resolveTimeAndResetFontSize(item.content)) : "";
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
