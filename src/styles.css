@@ -718,7 +718,7 @@
 .announcement-card[data-game="hkrpg"] {
   --card-accent: #786443;
   --card-border: #adb5c6;
-  border-radius: 2px 12px 2px 2px;
+  border-radius: 2px;
   background: #d9deea;
   color: #303440;
 }
