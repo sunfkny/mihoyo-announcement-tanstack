@@ -150,11 +150,19 @@ export async function getNapInfo(): Promise<NapResponse> {
     document.querySelectorAll("p").forEach((p) => {
       p.innerHTML = p.textContent.trim();
     });
-    const firstTimeRange = Array.from(document.querySelectorAll("table td[rowspan]"))
-      .map(i => i.textContent?.trim() ?? "")
+    function* getTimeRanges() {
+      for (const cell of document.querySelectorAll("table td[rowspan]")) {
+        yield cell.textContent.trim();
+      }
+      for (const p of document.querySelectorAll("p")) {
+        yield p.textContent.match(/本期代理人与音擎调频活动时间为[：:]\s*([^，,]+)/)?.[1]?.trim() ?? "";
+      }
+    }
+
+    const firstTimeRange = getTimeRanges()
       .filter(text => text.includes("~"))
       .map((text) => {
-        const [start_part, end_part] = text.split("~");
+        const [start_part, end_part] = text.split("~").map(part => part.trim());
         return {
           parsedStart: parseTimeHumanize(start_part),
           parsedEnd: parseTimeHumanize(end_part),
