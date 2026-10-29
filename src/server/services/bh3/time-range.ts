@@ -72,7 +72,7 @@ export async function getBh3TimeRange(content: string, reference?: string, ocr =
     }
 
     function* getImages() {
-      const heading = Iterator.from(window.document.querySelectorAll("h2,h3"))
+      const heading = Iterator.from(window.document.querySelectorAll("h1,h2,h3,h4,h5,h6"))
         .find(element => element.textContent.trim() === "补给信息");
       for (let element = heading?.nextElementSibling; element; element = element.nextElementSibling) {
         if (/^H[1-6]$/.test(element.tagName)) {

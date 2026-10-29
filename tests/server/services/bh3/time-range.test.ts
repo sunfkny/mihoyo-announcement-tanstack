@@ -56,6 +56,16 @@ describe("announcement text and OCR fallback", () => {
   const firstImage = "https://sdk-webstatic.mihoyo.com/upload/ann/2026/10/01/first.png";
   const secondImage = "https://sdk-webstatic.mihoyo.com/upload/ann/2026/10/01/second.png";
 
+  it.each(["h1", "h2", "h3", "h4", "h5", "h6"])("recognizes images under a %s supply heading and stops at the next section", async (heading) => {
+    recognize.mockResolvedValueOnce("补给时间 10月23日12:00~11月6日12:00");
+    const content = `<${heading}>补给信息</${heading}><p><img src="${firstImage}"></p><${heading}>补给规则</${heading}><p><img src="${secondImage}"></p>`;
+    expect(await getBh3TimeRange(content, "2026-10-20", true)).toEqual({
+      start: "2026-10-23 12:00:00",
+      end: "2026-11-06 12:00:00",
+    });
+    expect(recognize).toHaveBeenCalledExactlyOnceWith(firstImage);
+  });
+
   it("stops scanning at the next section heading when recognition fails", async () => {
     recognize.mockResolvedValueOnce(null);
     const content = `<h2>补给信息</h2><p><img src="${firstImage}"></p><h2>补给规则</h2><p><img src="${secondImage}"></p>`;
